@@ -49,7 +49,6 @@ penny
 ***
 
 # Hierarchy
---------------
 
 1. scadad
 
