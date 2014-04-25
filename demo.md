@@ -1,9 +1,9 @@
 Markdown Go-To Demo 
 ===================
+the code for this sample is a cheat sheet for markdown language
 
 # headers
 
-# one
 ## two
 ### main
 #### file
