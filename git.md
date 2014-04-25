@@ -1,5 +1,6 @@
 Git Setup
 =========
+this is a quick documentation on installing github, setting ssh key for passwordless commit/push, and how to add and remove files. 
 
 ### Setup
 
