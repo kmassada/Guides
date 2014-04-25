@@ -50,7 +50,7 @@ rsync -avHPS /mnt/cd/  /nfs/repo/rhel6
 mount -o loop CentOS-6.5-x86_64-bin-DVD2.iso  /mnt/cd/
 rsync -avHPS /mnt/cd/  /nfs/repo/rhel6
 ```
-note: I use http://mirror.umd.edu/centos/6/os/x86_64/ because it is the fastest at my location. 
+*note: I use http://mirror.umd.edu/centos/6/os/x86_64/ because it is the fastest at my location.*
 
 move Packages/*.rpm into /nfs/repo/rhel6
 remove all other folders but RPMs Packages and repodata folder
@@ -62,7 +62,7 @@ mv repodata/*comps.xml repodata/comps.xml
 createrepo -g repodata/comps.xml .
 ```
 
-this is optional, import keys 
+*this is optional, import keys *
 ```
 sudo rpm --import /nfs/repo/rhel6/RPM-GPG-KEY-redhat-beta /nfs/repo/rhel6/RPM-GPG-KEY-redhat-release
 ```
@@ -86,6 +86,9 @@ gpgcheck=1
 gpgkey=http://192.168.1.10/repo/rhel6/RPM-GPG-KEY-centos-6
 enabled=1
 ```
+*use your ip instead of mine at this stage*
+
+go to http:///192.168.1.10/repo it should have your rhel6 folder there
 
 tidy up
 ```
