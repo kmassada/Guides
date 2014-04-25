@@ -2,7 +2,7 @@ Markdown Go-To Demo
 ===================
 
 # headers
---------------
+
 # one
 ## two
 ### main
@@ -10,13 +10,13 @@ Markdown Go-To Demo
 ##### trade
 
 # bullets
---------------
+
 + one
 - two 
 * three
 
 # code
---------------
+
 
 ```
 No language indicated, so no syntax highlighting. 
@@ -26,20 +26,19 @@ But let's throw in a code snippet
 lorem ipssdasdfvasd asdfsd dsfsd fsdljsdnjasd asdjfnasdlkn dvasdojvnlajsdv asdflasjdbljSBDF 
 
 # table
---------------
+
 Markdown | Less | Pretty
 --- | --- | ---
 *Still* | `renders` | **nicely**
 1 | 2 | 3
 
 # quote
---------------
+
 > lorem ipssdasdfvasd asdfsd dsfsd fsdljsdnjasd asdjfnasdlkn dvasdojvnlajsdv asdflasjdbljSBDF 
 
-------------------------
+
 
 # Lines
---------------
 
 dime 
 
