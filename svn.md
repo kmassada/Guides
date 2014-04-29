@@ -136,4 +136,38 @@ remove [testrepo:/] from /etc/svn-access-control
 USAGE: http://tortoisesvn.net/docs/release/TortoiseSVN_en/index.html
 DOWNLOAD: http://tortoisesvn.net/downloads.html
 
-its really simple to use. if you need to upload files, go ahead and do it, it is easy from 
+#### create trunk directory and copy code to trunk
+```
+right click, create a branch /branches/app-1.0
+../../../ completely outside of project create a folder called working copy
+checkout branch /branches/app-1.0
+assuming you not alone on the project, from the moment you have created your branch, til the moment you actually ready to merge someone has let's say made changes to your trunk, so go into working copy dir, and merge from trunk (revision from branch to HEAD '1-HEAD'). 
+now commit working directory to the branch, /branches/app-1.0
+on trunk, svn update to make sure you have latest version
+go to trunk, merge /branches/app-1.0 to trunk. 
+```
+
+### websvn
+
+```
+$ yum install websvn
+```
+
+$ vi /etc/httpd/conf.d/websvn.conf
+```
+allow from all
+service httpd restart
+```
+
+to find server. 
+```
+$ rpm -ql websvn
+$ cd /usr/share/websvn/include
+$ vi config.php 
+$ config->parentPath('/var/www/svn/');
+
+$ service httpd restart
+```
+
+####
+Alias /websvn /var/www/websvn AuthBasicProvider ldap AuthType Basic AuthzLDAPAuthoritative off AuthName "Subversion Repository Web Browsing" AuthLDAPURL "ldap://adserver.domain.example.com:3268/DC=domain,DC=example s,DC=com?sAMAccountName?sub?(objectClass=*)" NONE AuthLDAPBindDN "CN=LDAP User,CN=Users,DC=domain,DC=example,DC=com" AuthLDAPBindPassword MakeItSecurePassword   require valid-user
