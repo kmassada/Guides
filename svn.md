@@ -98,7 +98,7 @@ SVN USAGE: http://svnbook.red-bean.com/en/1.7/index.html
 #### windows add
 open cmd
 ```
-\\\>svn --username admn -m "add folder" import test/ http://myvirt.pad.lan/svn/testrepo/
+\>svn --username admn -m "add folder" import test/ http://myvirt.pad.lan/svn/testrepo/
 Adding         test\sdasfdfsdf
 
 Committed revision 4.
@@ -106,7 +106,7 @@ Committed revision 4.
 
 add files 
 ```
-\\\>svn --username admn -m "add Guides folder" import Guides/ http://myvirt.pad.lan/svn/testrepo/
+\>svn --username admn -m "add Guides folder" import Guides/ http://myvirt.pad.lan/svn/testrepo/
 Adding         Guides\VMware.txt
 Adding         Guides\create-repo
 Adding         Guides\php-on-RHEL6.txt
@@ -117,7 +117,7 @@ Committed revision 5.
 
 this is an example of a delete
 ```
-\\\>svn --username admn -m "delete sdasfdfsdf file" delete http://myvirt.pad.lan/svn/testrepo/sdasfdfsdf
+\>svn --username admn -m "delete sdasfdfsdf file" delete http://myvirt.pad.lan/svn/testrepo/sdasfdfsdf
 
 Committed revision 14.
 
