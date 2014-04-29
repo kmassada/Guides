@@ -169,5 +169,20 @@ $ config->parentPath('/var/www/svn/');
 $ service httpd restart
 ```
 
-####
-Alias /websvn /var/www/websvn AuthBasicProvider ldap AuthType Basic AuthzLDAPAuthoritative off AuthName "Subversion Repository Web Browsing" AuthLDAPURL "ldap://adserver.domain.example.com:3268/DC=domain,DC=example s,DC=com?sAMAccountName?sub?(objectClass=*)" NONE AuthLDAPBindDN "CN=LDAP User,CN=Users,DC=domain,DC=example,DC=com" AuthLDAPBindPassword MakeItSecurePassword   require valid-user
+#### AD AUTH to websvn
+
+$ vi /etc/httpd/conf.d/websvn.conf
+```
+Alias /websvn /var/www/websvn
+ 
+AuthBasicProvider ldap
+AuthType Basic
+AuthzLDAPAuthoritative off
+AuthName "Subversion Repository Web Browsing"
+AuthLDAPURL "ldap://ad.domain.example.com:3268/DC=domain,DC=example
+s,DC=com?sAMAccountName?sub?(objectClass=*)" NONE
+AuthLDAPBindDN "CN=LDAP User,CN=Users,DC=domain,DC=example,DC=com"
+AuthLDAPBindPassword SecurePasswd
+ 
+require valid-user
+```
