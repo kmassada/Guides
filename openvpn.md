@@ -1,4 +1,4 @@
-### install copy files
+#### install copy files
 ```shell
 yum install openvpn easy-rsa -y
 cp /usr/share/doc/openvpn-*/sample/sample-config-files/server.conf /etc/openvpn/
@@ -6,7 +6,7 @@ cp /usr/share/doc/openvpn-*/sample/sample-config-files/server.conf /etc/openvpn/
 
 `mkdir -p /var/log/openvpn/`
 
-### config
+#### config
 ```shell
 grep ^[^#\;] /etc/openvpn/server.conf
 ```
@@ -41,14 +41,14 @@ verb 5
 mute 5
 ```
 
-### rsa keys
+#### rsa keys
 ```shell
 mkdir -p /etc/openvpn/easy-rsa/keys
 cp -rf /usr/share/easy-rsa/2.0/* /etc/openvpn/easy-rsa/
 cat /etc/openvpn/easy-rsa/vars
 ```
 
-#### rsa values
+##### rsa values
 ```
 export KEY_COUNTRY=”US”
 export KEY_PROVINCE=”MD”
@@ -59,14 +59,14 @@ export KEY_NAME=vpnserver
 export KEY_OU=servers
 ```
 
-#### ssl
+##### ssl
 ```shell
 cp openssl-1.0.0.cnf openssl.cnf
 source ./vars
 ./clean-all
 ```
 
-#### build keys
+##### build keys
 `./build-ca`
 ```
 CN: org ca
@@ -83,7 +83,7 @@ CN: vpnclient
 Name: vpnserver
 ```
 
-#### gen keys
+##### gen keys
 ```shell
 ./build-dh
 cd /etc/openvpn/easy-rsa
@@ -93,26 +93,28 @@ cp keys/vpnserver.{crt,key} /etc/openvpn/
 openvpn --genkey --secret /etc/openvpn/ta.key
 ```
 
-#### revoking
+##### revoking
 ```shell
 . /etc/openvpn/easy-rsa/2.0/vars
 . /etc/openvpn/easy-rsa/2.0/revoke-full client
 ```
 
-#### copy to client
+##### copy to client
 ```shell
 cd /etc/openvpn/easy-rsa/keys 
 scp ca.crt vpnclient.{key,crt} ../../ta.key vpnuser@vpnclient:~/
 ```
 
-### ip traffic
+#### ip traffic
 `vi /etc/sysctl.conf`
->Controls IP packet forwarding
-> net.ipv4.ip_forward = 1
+```
+#Controls IP packet forwarding
+ net.ipv4.ip_forward = 1
+```
 
 `sysctl -p`
 
-#### routing
+##### routing
 `iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o br0 -j MASQUERADE`
 
 ##### openvpn port
@@ -132,23 +134,22 @@ service openvpn start
 chkconfig openvpn on
 ```
 
-### Troubleshooting
+#### Troubleshooting
 notes
 
-#### [server side]
-##### turn off selinux
+##### [server side]
+###### turn off selinux
 ```shell
 setenforce 0
 ```
 
-##### replace enabled by disabled
+###### replace enabled by disabled
 ```shell
 vi /etc/selinux
 reboot
 ```
 
-##### netstat monitoring for traffic
-###### find traffic on interface
+###### netstat monitoring for traffic
 `netstat -t -u -Ibr0`
 
 ###### routing table
@@ -160,7 +161,7 @@ reboot
 ###### list of ports listening
 `netstat -t -u -l`
 
-#### [client side]
+##### [client side]
 `netstat -rn`
 
 `traceroute google.com`
