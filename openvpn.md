@@ -11,33 +11,35 @@ cp /usr/share/doc/openvpn-*/sample/sample-config-files/server.conf /etc/openvpn/
 grep ^[^#\;] /etc/openvpn/server.conf
 ```
 
->port 1194
->proto udp
->dev tun
->ca ca.crt
->cert vpnserver.crt
->key vpnserver.key  # This file should be kept secret
->dh dh2048.pem
->server 10.8.0.0 255.255.255.0
->ifconfig-pool-persist ipp.txt
->push "route 192.168.0.0 255.255.255.0"
->push "redirect-gateway def1 bypass-dhcp"
->push "dhcp-option DNS 8.8.8.8"
->push "dhcp-option DNS 8.8.4.4"
->client-to-client
->topology subnet
->keepalive 10 120
->tls-auth ta.key 0 # This file is secret
->comp-lzo
->user nobody
->group nobody
->persist-key
->persist-tun
->status /var/log/openvpn/openvpn-status.log
->log         /var/log/openvpn/openvpn.log
->log-append  /var/log/openvpn/openvpn.log
->verb 5
->mute 5
+```
+port 1194
+proto udp
+dev tun
+ca ca.crt
+cert vpnserver.crt
+key vpnserver.key  # This file should be kept secret
+dh dh2048.pem
+server 10.8.0.0 255.255.255.0
+ifconfig-pool-persist ipp.txt
+push "route 192.168.0.0 255.255.255.0"
+push "redirect-gateway def1 bypass-dhcp"
+push "dhcp-option DNS 8.8.8.8"
+push "dhcp-option DNS 8.8.4.4"
+client-to-client
+topology subnet
+keepalive 10 120
+tls-auth ta.key 0 # This file is secret
+comp-lzo
+user nobody
+group nobody
+persist-key
+persist-tun
+status /var/log/openvpn/openvpn-status.log
+log         /var/log/openvpn/openvpn.log
+log-append  /var/log/openvpn/openvpn.log
+verb 5
+mute 5
+```
 
 ## rsa keys
 ```shell
@@ -50,7 +52,7 @@ cat /etc/openvpn/easy-rsa/vars
 >export KEY_COUNTRY=”US”
 >export KEY_PROVINCE=”MD”
 >export KEY_CITY=”CharmCity”
->export KEY_ORG=”PAD”
+>export KEY_ORG=”org”
 >export KEY_EMAIL=”admn@domain.com”
 >export KEY_NAME=vpnserver
 >export KEY_OU=servers
@@ -64,15 +66,15 @@ source ./vars
 
 ### build keys
 `./build-ca`
->CN: pad ca
+>CN: org ca
 >Name: vpnserver
 
 `./build-key-server vpnserver`
 >CN: vpnserver
 >Name: vpnserver
 
-`./build-key 700Z5A`
->CN: 700Z5A
+`./build-key vpnclient`
+>CN: vpnclient
 >Name: vpnserver
 
 ### gen keys
@@ -94,7 +96,7 @@ openvpn --genkey --secret /etc/openvpn/ta.key
 ### copy to client
 ```shell
 cd /etc/openvpn/easy-rsa/keys 
-scp ca.crt 700Z5A.{key,crt} ../../ta.key st34lth@192.168.1.7:~/
+scp ca.crt vpnclient.{key,crt} ../../ta.key vpnuser@vpnclient:~/
 ```
 
 ## ip traffic
