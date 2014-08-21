@@ -149,16 +149,16 @@ vi /etc/selinux
 reboot
 ```
 
-**netstat monitoring for traffic**
+###### netstat monitoring for traffic
 `netstat -t -u -Ibr0`
 
-**routing table**
+###### routing table
 `netstat -r`
 
-**tcp/udp connections on server**
+###### tcp/udp connections on server
 `netstat -t -u -p`
 
-**list of ports listening**
+###### list of ports listening
 `netstat -t -u -l`
 
 ##### [client side]
