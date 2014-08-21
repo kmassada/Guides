@@ -1,4 +1,4 @@
-## install copy files
+### install copy files
 ```shell
 yum install openvpn easy-rsa -y
 cp /usr/share/doc/openvpn-*/sample/sample-config-files/server.conf /etc/openvpn/
@@ -6,7 +6,7 @@ cp /usr/share/doc/openvpn-*/sample/sample-config-files/server.conf /etc/openvpn/
 
 `mkdir -p /var/log/openvpn/`
 
-## config
+### config
 ```shell
 grep ^[^#\;] /etc/openvpn/server.conf
 ```
@@ -41,14 +41,14 @@ verb 5
 mute 5
 ```
 
-## rsa keys
+### rsa keys
 ```shell
 mkdir -p /etc/openvpn/easy-rsa/keys
 cp -rf /usr/share/easy-rsa/2.0/* /etc/openvpn/easy-rsa/
 cat /etc/openvpn/easy-rsa/vars
 ```
 
-### rsa values
+#### rsa values
 >export KEY_COUNTRY=”US”
 >export KEY_PROVINCE=”MD”
 >export KEY_CITY=”CharmCity”
@@ -57,14 +57,14 @@ cat /etc/openvpn/easy-rsa/vars
 >export KEY_NAME=vpnserver
 >export KEY_OU=servers
 
-### ssl
+#### ssl
 ```shell
 cp openssl-1.0.0.cnf openssl.cnf
 source ./vars
 ./clean-all
 ```
 
-### build keys
+#### build keys
 `./build-ca`
 >CN: org ca
 >Name: vpnserver
@@ -77,7 +77,7 @@ source ./vars
 >CN: vpnclient
 >Name: vpnserver
 
-### gen keys
+#### gen keys
 ```shell
 ./build-dh
 cd /etc/openvpn/easy-rsa
@@ -87,74 +87,74 @@ cp keys/vpnserver.{crt,key} /etc/openvpn/
 openvpn --genkey --secret /etc/openvpn/ta.key
 ```
 
-### revoking
+#### revoking
 ```shell
 . /etc/openvpn/easy-rsa/2.0/vars
 . /etc/openvpn/easy-rsa/2.0/revoke-full client
 ```
 
-### copy to client
+#### copy to client
 ```shell
 cd /etc/openvpn/easy-rsa/keys 
 scp ca.crt vpnclient.{key,crt} ../../ta.key vpnuser@vpnclient:~/
 ```
 
-## ip traffic
+### ip traffic
 `vi /etc/sysctl.conf`
 >Controls IP packet forwarding
 > net.ipv4.ip_forward = 1
 
 `sysctl -p`
 
-### routing
+#### routing
 `iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o br0 -j MASQUERADE`
 
-#### openvpn port
+##### openvpn port
 `iptables -I INPUT -p udp -m udp --dport 1194 -j ACCEPT`
 
-#### from and to interface routing
+##### from and to interface routing
 ```shell
 iptables -A FORWARD -i tun0 -j ACCEPT 
 iptables -A FORWARD -i br0 -o tun0 -m state --state RELATED,ESTABLISHED -j ACCEPT 
 iptables -A FORWARD -i tun0 -o br0 -m state --state RELATED,ESTABLISHED -j ACCEPT
 ```
 
-#### restart
+##### restart
 ```shell
 service iptables restart
 service openvpn start
 chkconfig openvpn on
 ```
 
-## Troubleshooting
+### Troubleshooting
 notes
 
-### [server side]
-#### turn off selinux
+#### [server side]
+##### turn off selinux
 ```shell
 setenforce 0
 ```
 
-#### replace enabled by disabled
+##### replace enabled by disabled
 ```shell
 vi /etc/selinux
 reboot
 ```
 
-#### netstat monitoring for traffic
-##### find traffic on interface
+##### netstat monitoring for traffic
+###### find traffic on interface
 `netstat -t -u -Ibr0`
 
-##### routing table
+###### routing table
 `netstat -r`
 
-##### tcp/udp connections on server
+###### tcp/udp connections on server
 `netstat -t -u -p`
 
-##### list of ports listening
+###### list of ports listening
 `netstat -t -u -l`
 
-### [client side]
+#### [client side]
 `netstat -rn`
 
 `traceroute google.com`
