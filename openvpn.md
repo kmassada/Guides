@@ -49,13 +49,15 @@ cat /etc/openvpn/easy-rsa/vars
 ```
 
 #### rsa values
->export KEY_COUNTRY=”US”
->export KEY_PROVINCE=”MD”
->export KEY_CITY=”CharmCity”
->export KEY_ORG=”org”
->export KEY_EMAIL=”admn@domain.com”
->export KEY_NAME=vpnserver
->export KEY_OU=servers
+```
+export KEY_COUNTRY=”US”
+export KEY_PROVINCE=”MD”
+export KEY_CITY=”CharmCity”
+export KEY_ORG=”org”
+export KEY_EMAIL=”admn@domain.com”
+export KEY_NAME=vpnserver
+export KEY_OU=servers
+```
 
 #### ssl
 ```shell
@@ -66,16 +68,20 @@ source ./vars
 
 #### build keys
 `./build-ca`
->CN: org ca
->Name: vpnserver
-
+```
+CN: org ca
+Name: vpnserver
+```
 `./build-key-server vpnserver`
->CN: vpnserver
->Name: vpnserver
-
+```
+CN: vpnserver
+Name: vpnserver
+```
 `./build-key vpnclient`
->CN: vpnclient
->Name: vpnserver
+```
+CN: vpnclient
+Name: vpnserver
+```
 
 #### gen keys
 ```shell
