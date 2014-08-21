@@ -133,7 +133,6 @@ notes
 #### turn off selinux
 ```shell
 setenforce 0
-grep ^[^#] /etc/openvpn/server.conf 
 ```
 
 #### replace enabled by disabled
