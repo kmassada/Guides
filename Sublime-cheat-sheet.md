@@ -1,34 +1,45 @@
-## search
+### search
+```
 ctrl-d			select word and next
 ctrl-k-ctrl-d	select skip
 ctrl-m 			select bracket
 F9				sort
 ctrl-shift-f	search indexer
+```
 
-## Navigator
+### Navigator
+```
 ctrl-p			search files
 ctrl-r			search same page
 ctrl-p-@		search file then page
+```
 
-
-## splits
+### splits
+```
 alt-shift-2 	two side by side
 ctrl-shift-num	move file to group
 ctrl-num		jump to group
+```
 
-## new 
+### new 
+```
 ctrl-alt-n		new file hybrid
+```
 
-## projects
+### projects
+```
 alt-ctrl-p		switch projects
+```
 
-## snipet
+### snipet
+```
 lorem + tab
 comment-snippet
+```
 
-##  plugins
+###  plugins
 
-### main
+#### main
 + DocBlockr
 + Emmet
 + Emmet-css
@@ -62,7 +73,7 @@ comment-snippet
   - pep8
     + `pip install pep8`
 
-###	themes
+####	themes
 + daylerees-themes 
   + [zack's contrast]
 + Monakai Extended 
