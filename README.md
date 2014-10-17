@@ -19,3 +19,6 @@ setting up a local repository for centos6 RHEL6. This quick guide uses httpd, an
 
 ### vi-tips.md
 shortcuts, and commonly used basic functions of the vi-editor
+
+### Sublime-cheat-sheet.md
+shortcuts, and commonly used extensions of the sublime-editor
