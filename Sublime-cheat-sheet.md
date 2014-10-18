@@ -41,6 +41,7 @@ comment-snippet
 
 #### main
 + DocBlockr
++ Comment-snippet
 + Emmet
 + Emmet-css
 + GIT
