@@ -153,4 +153,33 @@ git reset --soft HEAD~1
 git commit -c ORIG_HEAD 
 ```
 
+#### create branch off master, move forward, and back
 
+first create branch off a given hash
+```shell
+git pull origin master
+git checkout <hash>
+git checkout -b slave
+```
+
+compare master head to current branch
+```shell
+diff master --stat 
+```
+
+get more stats on on current branch
+```shell
+git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abb
+rev-commit
+```
+
+commit your local changes
+```shell
+git add info.txt
+git commit -m 'test file'
+git push fuel-fund cgdevel
+```
+merge up
+```shell
+git merge <hash> -n
+```
